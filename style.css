@@ -52,6 +52,7 @@ nav a:hover {
 
 .card-container {
     max-width: 600px;
+    max-height:600px;
     margin: 40px auto;
     background: white;
     padding: 30px;
@@ -80,8 +81,8 @@ nav a:hover {
     background: var(--main-pink);
     border: 3px solid white;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 200px;
+    height: 200px;
     cursor: pointer;
     font-size: 24px;
     z-index: 1000;
