@@ -35,7 +35,7 @@ h1 {
 }
 
 h1 img {
-    width: clamp(80px, 20vw, 200px);
+    width: clamp(40px, 8vw, 70px);
     height: auto;
     vertical-align: middle;
 }
@@ -191,10 +191,9 @@ nav a:hover, nav a:active {
     color: #555;
 }
 
-/* Surprise page big icon */
+/* Surprise page big icon / emoji */
 .big-icon {
     font-size: clamp(60px, 18vw, 120px);
     margin: 10px 0;
     display: block;
-    color: var(--main-pink);
 }
