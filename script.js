@@ -30,3 +30,7 @@ window.addEventListener('load', () => {
         music.play();
     }
 });Interval(createFlower, 300);
+
+localStorage.setItem("musicTime", audio.currentTime);
+audio.currentTime=localStorage.getItem("musicTime") || 0;
+audio.play();
