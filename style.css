@@ -114,9 +114,8 @@ nav a:hover, nav a:active {
 }
 
 .gallery-grid img {
-    width: clamp(140px, 42vw, 260px);
-    height: clamp(140px, 42vw, 260px);
-    object-fit: cover;
+    width: clamp(150px, 44vw, 280px);
+    height: auto;
     border: 6px solid white;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);

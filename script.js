@@ -12,7 +12,7 @@ function createFlower() {
 }
 setInterval(createFlower, 300);
 
-// Music Persistence — sessionStorage clears automatically when tab/browser is closed
+// Music controls
 function toggleMusic() {
     const music = document.getElementById('bgMusic');
     if (music.paused) {
@@ -24,17 +24,16 @@ function toggleMusic() {
     }
 }
 
-// Save current playback time before navigating to another page on the site
+// Save playback position before navigating away
 window.addEventListener('beforeunload', () => {
     const music = document.getElementById('bgMusic');
     if (music) {
         sessionStorage.setItem('musicTime', music.currentTime);
-        if (!music.paused) {
-            sessionStorage.setItem('musicStatus', 'playing');
-        }
+        sessionStorage.setItem('musicStatus', music.paused ? 'paused' : 'playing');
     }
 });
 
+// Resume music from saved position on page load
 window.addEventListener('load', () => {
     const music = document.getElementById('bgMusic');
     if (!music) return;
@@ -42,16 +41,19 @@ window.addEventListener('load', () => {
     const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
     const savedStatus = sessionStorage.getItem('musicStatus');
 
-    if (!isNaN(savedTime) && savedTime > 0) {
-        music.currentTime = savedTime;
+    if (savedStatus !== 'playing') return;
+
+    function resume() {
+        if (!isNaN(savedTime) && savedTime > 0) {
+            music.currentTime = savedTime;
+        }
+        music.play().catch(() => {});
     }
 
-    if (savedStatus === 'playing') {
-        const playPromise = music.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(() => {
-                // Autoplay blocked — music will play after first user interaction
-            });
-        }
+    // Wait until audio has enough metadata to seek
+    if (music.readyState >= 1) {
+        resume();
+    } else {
+        music.addEventListener('loadedmetadata', resume, { once: true });
     }
 });
