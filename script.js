@@ -1,6 +1,6 @@
 // Falling Flowers Logic
 function createFlower() {
-    const flowers = ['˙⋆❀⋆˙', 'ꕤ', '✿', '⁺˳✿⏦₊', '❁ ྀིྀི'];
+    const flowers = ['˙⋆❀⋆˙', 'ꕤ', '✿', '⁺˳✿⏦₊', '❁'];
     const f = document.createElement('div');
     f.classList.add('flower');
     f.innerText = flowers[Math.floor(Math.random() * flowers.length)];
@@ -12,7 +12,7 @@ function createFlower() {
 }
 setInterval(createFlower, 300);
 
-// Music Persistence
+// Music Persistence with time tracking
 function toggleMusic() {
     const music = document.getElementById('bgMusic');
     if (music.paused) {
@@ -24,9 +24,34 @@ function toggleMusic() {
     }
 }
 
+// Save current playback time before leaving the page
+window.addEventListener('beforeunload', () => {
+    const music = document.getElementById('bgMusic');
+    if (music) {
+        localStorage.setItem('musicTime', music.currentTime);
+        if (!music.paused) {
+            localStorage.setItem('musicStatus', 'playing');
+        }
+    }
+});
+
 window.addEventListener('load', () => {
     const music = document.getElementById('bgMusic');
-    if (localStorage.getItem('musicStatus') === 'playing') {
-        music.play();
+    if (!music) return;
+
+    const savedTime = parseFloat(localStorage.getItem('musicTime') || '0');
+    const savedStatus = localStorage.getItem('musicStatus');
+
+    if (!isNaN(savedTime) && savedTime > 0) {
+        music.currentTime = savedTime;
     }
-});Interval(createFlower, 300);
+
+    if (savedStatus === 'playing') {
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Autoplay blocked — user needs to interact first
+            });
+        }
+    }
+});

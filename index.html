@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAPPY BIRTHDAY!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="bday-header">
-        <h1>HAPPY BIRTHDAY TO MY FAVORITE GIRL:)! <img src="media/flower.png" alt="flower" width="300" height="300"></h1>
+        <h1>🎉 Happy Birthday To My Favorite Girl! <img src="media/flower.png" alt="flower"></h1>
     </header>
 
     <div class="card-container">
-        <h2 style="color: var(--main-pink);">Click to Open Your Card</h2>
-        <div id="opener" style="font-size: 100px; cursor: pointer;"><img src="media/bdaybox.png" alt="giftbox" width="500" height="500"></div>
-        
+        <h2 style="color: var(--main-pink);">🎁 Click to Open Your Card</h2>
+        <div id="opener" style="cursor: pointer;">
+            <img src="media/bdaybox.png" alt="giftbox">
+        </div>
+
         <div id="nav-links" style="display: none; margin-top: 20px;">
             <nav>
-                <a href="wishes.html">4 Birthday Wishes</a>
-                <a href="gallery.html">The Birthday Girl</a>
-                <a href="surprise.html">Final Surprise</a>
+                <a href="wishes.html">💌 4 Birthday Wishes</a>
+                <a href="gallery.html">📸 The Birthday Girl</a>
+                <a href="surprise.html">🎊 Final Surprise</a>
             </nav>
         </div>
     </div>
@@ -29,10 +32,13 @@
     <script src="script.js"></script>
     <script>
         document.getElementById('opener').addEventListener('click', function() {
-            this.innerText = '';
+            const img = this.querySelector('img');
+            if (img) img.style.display = 'none';
             document.getElementById('nav-links').style.display = 'block';
-            document.getElementById('bgMusic').play();
+            const music = document.getElementById('bgMusic');
+            music.play();
             localStorage.setItem('musicStatus', 'playing');
+            localStorage.setItem('musicTime', '0');
         });
     </script>
 </body>
