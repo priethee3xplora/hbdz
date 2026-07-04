@@ -191,9 +191,10 @@ nav a:hover, nav a:active {
     color: #555;
 }
 
-/* Surprise page big emoji */
-.big-emoji {
+/* Surprise page big icon */
+.big-icon {
     font-size: clamp(60px, 18vw, 120px);
     margin: 10px 0;
     display: block;
+    color: var(--main-pink);
 }

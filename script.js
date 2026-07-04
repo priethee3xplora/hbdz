@@ -12,25 +12,25 @@ function createFlower() {
 }
 setInterval(createFlower, 300);
 
-// Music Persistence with time tracking
+// Music Persistence — sessionStorage clears automatically when tab/browser is closed
 function toggleMusic() {
     const music = document.getElementById('bgMusic');
     if (music.paused) {
         music.play();
-        localStorage.setItem('musicStatus', 'playing');
+        sessionStorage.setItem('musicStatus', 'playing');
     } else {
         music.pause();
-        localStorage.setItem('musicStatus', 'paused');
+        sessionStorage.setItem('musicStatus', 'paused');
     }
 }
 
-// Save current playback time before leaving the page
+// Save current playback time before navigating to another page on the site
 window.addEventListener('beforeunload', () => {
     const music = document.getElementById('bgMusic');
     if (music) {
-        localStorage.setItem('musicTime', music.currentTime);
+        sessionStorage.setItem('musicTime', music.currentTime);
         if (!music.paused) {
-            localStorage.setItem('musicStatus', 'playing');
+            sessionStorage.setItem('musicStatus', 'playing');
         }
     }
 });
@@ -39,8 +39,8 @@ window.addEventListener('load', () => {
     const music = document.getElementById('bgMusic');
     if (!music) return;
 
-    const savedTime = parseFloat(localStorage.getItem('musicTime') || '0');
-    const savedStatus = localStorage.getItem('musicStatus');
+    const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+    const savedStatus = sessionStorage.getItem('musicStatus');
 
     if (!isNaN(savedTime) && savedTime > 0) {
         music.currentTime = savedTime;
@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
         const playPromise = music.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                // Autoplay blocked — user needs to interact first
+                // Autoplay blocked — music will play after first user interaction
             });
         }
     }

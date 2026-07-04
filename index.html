@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAPPY BIRTHDAY!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="bday-header">
-        <h1>🎉 Happy Birthday To My Favorite Girl! <img src="media/flower.png" alt="flower"></h1>
+        <h1><i class="fa-solid fa-champagne-glasses"></i> Happy Birthday To My Favorite Girl! <img src="media/flower.png" alt="flower"></h1>
     </header>
 
     <div class="card-container">
-        <h2 style="color: var(--main-pink);">🎁 Click to Open Your Card</h2>
+        <h2 style="color: var(--main-pink);"><i class="fa-solid fa-gift"></i> Click to Open Your Card</h2>
         <div id="opener" style="cursor: pointer;">
             <img src="media/bdaybox.png" alt="giftbox">
         </div>
 
         <div id="nav-links" style="display: none; margin-top: 20px;">
             <nav>
-                <a href="wishes.html">💌 4 Birthday Wishes</a>
-                <a href="gallery.html">📸 The Birthday Girl</a>
-                <a href="surprise.html">🎊 Final Surprise</a>
+                <a href="wishes.html"><i class="fa-solid fa-envelope-open-text"></i> 4 Birthday Wishes</a>
+                <a href="gallery.html"><i class="fa-solid fa-camera"></i> The Birthday Girl</a>
+                <a href="surprise.html"><i class="fa-solid fa-star"></i> Final Surprise</a>
             </nav>
         </div>
     </div>
 
     <audio id="bgMusic" loop><source src="media/rum•gold - Call It What You Want.mp3" type="audio/mpeg"></audio>
-    <button class="music-btn" onclick="toggleMusic()">🎵</button>
+    <button class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></button>
 
     <script src="script.js"></script>
     <script>
@@ -37,8 +38,8 @@
             document.getElementById('nav-links').style.display = 'block';
             const music = document.getElementById('bgMusic');
             music.play();
-            localStorage.setItem('musicStatus', 'playing');
-            localStorage.setItem('musicTime', '0');
+            sessionStorage.setItem('musicStatus', 'playing');
+            sessionStorage.setItem('musicTime', '0');
         });
     </script>
 </body>
